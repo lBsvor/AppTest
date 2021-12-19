@@ -24,6 +24,7 @@ namespace DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<LocationNote> LocationNotes { get; set; }
 
 
 
@@ -69,6 +70,12 @@ namespace DAL
             builder.Entity<OrderDetail>().ToTable($"App{nameof(this.OrderDetails)}");
             builder.Entity<OrderDetail>().Property(p => p.UnitPrice).HasColumnType(priceDecimalType);
             builder.Entity<OrderDetail>().Property(p => p.Discount).HasColumnType(priceDecimalType);
+
+            builder.Entity<LocationNote>().ToTable($"App{nameof(this.LocationNotes)}");
+            builder.Entity<LocationNote>().Property(p => p.XCoordinate).HasColumnType(priceDecimalType);
+            builder.Entity<LocationNote>().Property(p => p.YCoordinate).HasColumnType(priceDecimalType);
+            builder.Entity<LocationNote>().Property(p => p.Note).HasMaxLength(500);
+
         }
 
 

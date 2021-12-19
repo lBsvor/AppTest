@@ -9,9 +9,6 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 
 import { fadeInOut } from '../../services/animations';
 import { BootstrapTabDirective } from '../../directives/bootstrap-tab.directive';
-import { AccountService } from '../../services/account.service';
-import { Permission } from '../../models/permission.model';
-
 
 @Component({
   selector: 'app-settings',
@@ -38,7 +35,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   tab: BootstrapTabDirective;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private accountService: AccountService) {
+  constructor(private router: Router, private route: ActivatedRoute) {
   }
 
 
@@ -56,10 +53,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
       anchor = anchor.toLowerCase();
     }
 
-    if ((this.isFragmentEquals(anchor, this.usersTab) && !this.canViewUsers) ||
-      (this.isFragmentEquals(anchor, this.rolesTab) && !this.canViewRoles)) {
-      return;
-    }
 
     this.tab.show(`#${anchor || this.profileTab}Tab`);
   }
@@ -90,12 +83,4 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.router.navigate([], { fragment: activeTab });
   }
 
-
-  get canViewUsers() {
-    return this.accountService.userHasPermission(Permission.viewUsersPermission);
-  }
-
-  get canViewRoles() {
-    return this.accountService.userHasPermission(Permission.viewRolesPermission);
-  }
 }

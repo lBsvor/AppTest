@@ -6,7 +6,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { AppTranslationService } from './app-translation.service';
 import { ThemeManager } from './theme-manager';
 import { LocalStoreManager } from './local-store-manager.service';
 import { DBkeys } from './db-keys';
@@ -28,16 +27,12 @@ export class ConfigurationService {
 
     constructor(
         private localStorage: LocalStoreManager,
-        private translationService: AppTranslationService,
         private themeManager: ThemeManager) {
-
-        this.loadLocalChanges();
     }
 
     set language(value: string) {
         this._language = value;
         this.saveToLocalStore(value, DBkeys.LANGUAGE);
-        this.translationService.changeLanguage(value);
     }
     get language() {
         return this._language || ConfigurationService.defaultLanguage;
@@ -106,7 +101,7 @@ export class ConfigurationService {
     public baseUrl = environment.baseUrl || Utilities.baseUrl();
     public tokenUrl = environment.tokenUrl || environment.baseUrl || Utilities.baseUrl();
     public loginUrl = environment.loginUrl;
-    public fallbackBaseUrl = 'https://testapp.ebenmonney.com';
+    public fallbackBaseUrl = 'https://quickapp.ebenmonney.com';
     // ***End of defaults***
 
     private _language: string = null;
@@ -119,42 +114,6 @@ export class ConfigurationService {
     private onConfigurationImported: Subject<boolean> = new Subject<boolean>();
 
     configurationImported$ = this.onConfigurationImported.asObservable();
-
-    private loadLocalChanges() {
-        if (this.localStorage.exists(DBkeys.LANGUAGE)) {
-            this._language = this.localStorage.getDataObject<string>(DBkeys.LANGUAGE);
-            this.translationService.changeLanguage(this._language);
-        } else {
-            this.resetLanguage();
-        }
-
-        if (this.localStorage.exists(DBkeys.THEME_ID)) {
-            this._themeId = this.localStorage.getDataObject<number>(DBkeys.THEME_ID);
-            this.themeManager.installTheme(this.themeManager.getThemeByID(this._themeId));
-        } else {
-            this.resetTheme();
-        }
-
-        if (this.localStorage.exists(DBkeys.HOME_URL)) {
-            this._homeUrl = this.localStorage.getDataObject<string>(DBkeys.HOME_URL);
-        }
-
-        if (this.localStorage.exists(DBkeys.SHOW_DASHBOARD_STATISTICS)) {
-            this._showDashboardStatistics = this.localStorage.getDataObject<boolean>(DBkeys.SHOW_DASHBOARD_STATISTICS);
-        }
-
-        if (this.localStorage.exists(DBkeys.SHOW_DASHBOARD_NOTIFICATIONS)) {
-            this._showDashboardNotifications = this.localStorage.getDataObject<boolean>(DBkeys.SHOW_DASHBOARD_NOTIFICATIONS);
-        }
-
-        if (this.localStorage.exists(DBkeys.SHOW_DASHBOARD_TODO)) {
-            this._showDashboardTodo = this.localStorage.getDataObject<boolean>(DBkeys.SHOW_DASHBOARD_TODO);
-        }
-
-        if (this.localStorage.exists(DBkeys.SHOW_DASHBOARD_BANNER)) {
-            this._showDashboardBanner = this.localStorage.getDataObject<boolean>(DBkeys.SHOW_DASHBOARD_BANNER);
-        }
-    }
 
     private saveToLocalStore(data: any, key: string) {
         setTimeout(() => this.localStorage.savePermanentData(data, key));
@@ -229,19 +188,11 @@ export class ConfigurationService {
         this.localStorage.deleteData(DBkeys.SHOW_DASHBOARD_TODO);
         this.localStorage.deleteData(DBkeys.SHOW_DASHBOARD_BANNER);
 
-        this.resetLanguage();
+    
         this.resetTheme();
     }
 
-    private resetLanguage() {
-        const language = this.translationService.useBrowserLanguage();
-
-        if (language) {
-            this._language = language;
-        } else {
-            this._language = this.translationService.useDefaultLangage();
-        }
-    }
+    
 
     private resetTheme() {
         this.themeManager.installTheme();

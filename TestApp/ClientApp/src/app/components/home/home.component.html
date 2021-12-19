@@ -1,6 +1,6 @@
 <div class="container">
   <header class="pageHeader">
-    <h3><i class="fa fa-tachometer fa-lg page-caption" aria-hidden="true"></i> {{'pageHeader.Dashboard' | translate}}</h3>
+    <h3><i class="fa fa-tachometer fa-lg page-caption" aria-hidden="true"></i> {{'pageHeader.Dashboard' }}</h3>
   </header>
 
   <div [@fadeInOut]>
@@ -8,8 +8,8 @@
       <div *ngIf="!configurations.showDashboardStatistics && !configurations.showDashboardNotifications && !configurations.showDashboardTodo && !configurations.showDashboardBanner" class="col-12 my-5">
         <div class="card card-body bg-light">
           <h4 class="text-muted text-center">
-            {{'home.NoWidgets1' | translate}} <a routerLink="/settings" fragment="preferences"><i class="fa fa-sliders"></i> {{'settings.tab.Preferences' | translate}}</a>
-            {{'home.NoWidgets2' | translate}}
+            {{'home.NoWidgets1' }} <a routerLink="/settings" fragment="preferences"><i class="fa fa-sliders"></i> {{'settings.tab.Preferences' }}</a>
+            {{'home.NoWidgets2' }}
           </h4>
         </div>
       </div>
@@ -20,7 +20,7 @@
         </button>
         <div class="clearfix"></div>
         <div class="card card-body bg-light">
-          <h5 class="text-muted d-inline-block">{{'home.StatisticsTitle' | translate}}</h5>
+          <h5 class="text-muted d-inline-block">{{'home.StatisticsTitle' }}</h5>
           <app-statistics-demo></app-statistics-demo>
         </div>
       </div>

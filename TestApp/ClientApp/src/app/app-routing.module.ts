@@ -6,7 +6,6 @@
 import { NgModule, Injectable } from '@angular/core';
 import { Routes, RouterModule, DefaultUrlSerializer, UrlSerializer, UrlTree } from '@angular/router';
 
-import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -40,13 +39,7 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, data: { title: 'Home' } },
-  { path: 'login', component: LoginComponent, data: { title: 'Login' } },
-  { path: 'customers', component: CustomersComponent, data: { title: 'Customers' } },
-  { path: 'products', component: ProductsComponent, data: { title: 'Products' } },
-  { path: 'orders', component: OrdersComponent,, data: { title: 'Orders' } },
-  { path: 'settings', component: SettingsComponent, data: { title: 'Settings' } },
-  { path: 'about', component: AboutComponent, data: { title: 'About Us' } },
+ { path: 'about', component: AboutComponent, data: { title: 'About Us' } },
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent, data: { title: 'Page Not Found' } }
 ];

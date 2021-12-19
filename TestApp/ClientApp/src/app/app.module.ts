@@ -24,16 +24,10 @@ import { ChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppErrorHandler } from './app-error.handler';
 import { AppTitleService } from './services/app-title.service';
-import { AppTranslationService, TranslateLanguageLoader } from './services/app-translation.service';
 import { ConfigurationService } from './services/configuration.service';
 import { AlertService } from './services/alert.service';
 import { ThemeManager } from './services/theme-manager';
 import { LocalStoreManager } from './services/local-store-manager.service';
-import { OidcHelperService } from './services/oidc-helper.service';
-import { NotificationService } from './services/notification.service';
-import { NotificationEndpoint } from './services/notification-endpoint.service';
-import { AccountService } from './services/account.service';
-import { AccountEndpoint } from './services/account-endpoint.service';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 import { LastElementDirective } from './directives/last-element.directive';
@@ -43,7 +37,6 @@ import { BootstrapToggleDirective } from './directives/bootstrap-toggle.directiv
 import { GroupByPipe } from './pipes/group-by.pipe';
 
 import { AppComponent } from './components/app.component';
-import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { ProductsComponent } from './components/products/products.component';
@@ -53,15 +46,8 @@ import { AboutComponent } from './components/about/about.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { BannerDemoComponent } from './components/controls/banner-demo.component';
-import { TodoDemoComponent } from './components/controls/todo-demo.component';
-import { StatisticsDemoComponent } from './components/controls/statistics-demo.component';
-import { NotificationsViewerComponent } from './components/controls/notifications-viewer.component';
 import { SearchBoxComponent } from './components/controls/search-box.component';
-import { UserInfoComponent } from './components/controls/user-info.component';
-import { UserPreferencesComponent } from './components/controls/user-preferences.component';
-import { UsersManagementComponent } from './components/controls/users-management.component';
-import { RolesManagementComponent } from './components/controls/roles-management.component';
-import { RoleEditorComponent } from './components/controls/role-editor.component';
+
 
 
 @NgModule({
@@ -71,12 +57,6 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: TranslateLanguageLoader
-      }
-    }),
     NgxDatatableModule,
     OAuthModule.forRoot(),
     ToastaModule.forRoot(),
@@ -90,19 +70,18 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
   ],
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
     CustomersComponent,
     ProductsComponent,
     OrdersComponent,
     SettingsComponent,
-    UsersManagementComponent, UserInfoComponent, UserPreferencesComponent,
-    RolesManagementComponent, RoleEditorComponent,
+    
+
     AboutComponent,
     NotFoundComponent,
-    NotificationsViewerComponent,
+    
     SearchBoxComponent,
-    StatisticsDemoComponent, TodoDemoComponent, BannerDemoComponent,
+     BannerDemoComponent,
     EqualValidator,
     LastElementDirective,
     AutofocusDirective,
@@ -116,13 +95,8 @@ import { RoleEditorComponent } from './components/controls/role-editor.component
     ThemeManager,
     ConfigurationService,
     AppTitleService,
-    AppTranslationService,
-    NotificationService,
-    NotificationEndpoint,
-    AccountService,
-    AccountEndpoint,
     LocalStoreManager,
-    OidcHelperService
+ 
   ],
   bootstrap: [AppComponent]
 })
